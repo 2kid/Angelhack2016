@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@using(Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+@Html.Label("referenceNo","Reference Number") 
+    @Html.TextBox("referenceNo", "", new { @class="form-control"})
+    @Html.Label("transactionNo","Transaction Number")  
+    @Html.TextBox("transactionNo", "", new { @class = "form-control" })
+    <br />
+    <button type="submit">Open</button>
+</div>
+     
+}

@@ -1,0 +1,49 @@
+﻿@model AngelHack2016.Models.FeedbackResult
+
+@{
+    ViewBag.Title = "Feedback Analysis";
+}
+
+<h2>Feedback Analysis</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Feedback
+        </th>
+        <th>
+            Transaction Number
+        </th>  
+        <th>
+          Sentiment Score
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Feedback) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.transactionNo)
+        </td>
+        @if(item.SentimentScore != null)
+        { 
+        <td>
+          @(item.SentimentScore * 10)/10
+        </td>
+        }
+        else
+        {
+            <td></td>
+        }
+        <td>
+         </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,132 @@
+﻿@model AngelHack2016.Models.Business
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Business</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Industry, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.maxTransactionNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.maxTransactionNumber, new { htmlAttributes = new { @class = "form-control", min = "1" } })
+                @Html.ValidationMessageFor(model => model.maxTransactionNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.minTransactionNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.minTransactionNumber, new { htmlAttributes = new { @class = "form-control" , min="0"} })
+                @Html.ValidationMessageFor(model => model.minTransactionNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.referenceNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.referenceNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.referenceNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.quicine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quicine, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.quicine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div id="map"></div>
+        <div id="latlong">
+            <input size="20" type="hidden" id="latitude" name="latitude">
+            <input size="20" type="hidden" id="longitude" name="longitude">
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var map;
+        function initMap() {
+            var myOptions = {
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
+            var marker = new google.maps.Marker({
+                draggable: true,
+                map: map,
+                title: "Your location"
+            });
+            // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                marker.setPosition(pos);
+                map.setCenter(pos);
+
+                google.maps.event.addListener(marker,'click',function(overlay,point){
+                    document.getElementById("latitude").value = lat();
+                    document.getElementById("longitude").value = lng();
+                });
+
+                google.maps.event.addListener(marker, 'click', function (event) {
+                    document.getElementById("latitude").value = this.getPosition().lat();
+                    document.getElementById("longitude").value = this.getPosition().lng();
+                });
+
+                google.maps.event.addListener(marker, 'dragend', function (event) {
+                    document.getElementById("latitude").value = this.getPosition().lat();
+                    document.getElementById("longitude").value = this.getPosition().lng();
+                });
+            });
+        }    
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoVCLrHL6wZfZ_o8eod8oN4bL5bmDGzEA&callback=initMap">
+</script>
+
+}

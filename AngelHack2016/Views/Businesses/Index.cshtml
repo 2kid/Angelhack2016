@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AngelHack2016.Models.Business>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Industry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maxTransactionNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.minTransactionNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referenceNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Industry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maxTransactionNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.minTransactionNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.referenceNo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BusinessId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BusinessId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BusinessId })
+        </td>
+    </tr>
+}
+
+</table>
