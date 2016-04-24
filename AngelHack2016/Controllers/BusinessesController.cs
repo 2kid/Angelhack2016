@@ -36,10 +36,9 @@ namespace AngelHack2016.Controllers
             List<Feedback> analyzedFeedback = db.FeedBacks.Include(a=>a.Business).Where(r=>r.Business.Username == User.Identity.Name && r.SentimentScore != null).ToList();
 
                 FeedbackResult result = new FeedbackResult();
-                result.PositiveSentiments = analyzedFeedback.Count(m => m.SentimentScore >= 0.6m);
-                result.NegativeSentiments = analyzedFeedback.Count(m => m.SentimentScore <= 0.4m);
-                result.NeutralSentiments = analyzedFeedback.Count(m => m.SentimentScore < 0.6m && m.SentimentScore > 0.4m);
-                result.Feedback = analyzedFeedback;
+                result.PositiveSentiments = analyzedFeedback.Where(m => m.SentimentScore >= 0.6m).ToList();
+                result.NegativeSentiments = analyzedFeedback.Where(m => m.SentimentScore <= 0.4m).ToList();
+                result.NeutralSentiments = analyzedFeedback.Where(m => m.SentimentScore < 0.6m && m.SentimentScore > 0.4m).ToList();
             return View(result);
         }
 
@@ -69,7 +68,7 @@ namespace AngelHack2016.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BusinessId,Name,Industry,maxTransactionNumber,minTransactionNumber,referenceNo,longitude,latitude,quicine")] Business business)
+        public ActionResult Create([Bind(Include = "BusinessId,Name,Industry,maxTransactionNumber,minTransactionNumber,referenceNo,longitude,latitude,cuisine")] Business business)
         {
             double a = business.longitude;
             double b = business.latitude;
@@ -104,7 +103,7 @@ namespace AngelHack2016.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BusinessId,Name,Industry,maxTransactionNumber,minTransactionNumber,referenceNo,,longitude,latitude,quicine")] Business business)
+        public ActionResult Edit([Bind(Include = "BusinessId,Name,Industry,maxTransactionNumber,minTransactionNumber,referenceNo,,longitude,latitude,cuisine")] Business business)
         {
             if (ModelState.IsValid)
             {

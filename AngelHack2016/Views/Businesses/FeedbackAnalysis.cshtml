@@ -5,45 +5,221 @@
 }
 
 <h2>Feedback Analysis</h2>
+<div class="row">
+    <ul class="list-group  col col-md-4" style=" max-width: 300px;">
+        <li class="list-group-item"><span class="badge">@Model.PositiveSentiments.Count</span> <b>Positive Sentiments:</b></li>
+        <li class="list-group-item"><span class="badge">@Model.NegativeSentiments.Count</span> <b>Negative Sentiments:</b></li>
+        <li class="list-group-item"><span class="badge">@Model.NeutralSentiments.Count</span> <b>Neutral Sentiments:</b></li>
+    </ul>
+    <div class="col col-md-4" style="height:150px;">
+        <!--Div that will hold the pie chart-->
+        <div id="chart_div"></div>
+    </div>
+    <div class="col col-md-4">
+        <!--Div that will hold the pie chart-->
+        <div id="bar_div"></div>
+    </div>
+    
+</div>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#positive"><h4>Positive</h4></a></li>
+    <li><a data-toggle="tab" href="#negative"><h4>Negative</h4></a></li>
+    <li><a data-toggle="tab" href="#neutral"><h4>Neutral</h4></a></li>
+</ul>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Feedback
-        </th>
-        <th>
-            Transaction Number
-        </th>  
-        <th>
-          Sentiment Score
-        </th>
-        <th></th>
-    </tr>
+<div class="tab-content">
+    <div id="positive" class="tab-pane fade in active">
+        <table class="table">
+            <tr>
+                <th>
+                    Feedback
+                </th>
+                <th>
+                    Transaction Number
+                </th>
+                <th>
+                    Sentiment Score
+                </th>
+                <th>Date Submitted</th>
+            </tr>
 
-@foreach (var item in Model.Feedback) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.transactionNo)
-        </td>
-        @if(item.SentimentScore != null)
-        { 
-        <td>
-          @(item.SentimentScore * 10)/10
-        </td>
-        }
-        else
-        {
-            <td></td>
-        }
-        <td>
-         </td>
-    </tr>
+            @foreach (var item in Model.PositiveSentiments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.transactionNo)
+                    </td>
+                    @if (item.SentimentScore != null)
+                    {
+                        <td>
+                            @(item.SentimentScore * 10)/10
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>
+                        @item.DateTimeSubmitted
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+    <div id="negative" class="tab-pane fade">
+        <table class="table">
+            <tr>
+                <th>
+                    Feedback
+                </th>
+                <th>
+                    Transaction Number
+                </th>
+                <th>
+                    Sentiment Score
+                </th>
+                <th>Date Submitted</th>
+            </tr>
+
+            @foreach (var item in Model.NegativeSentiments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.transactionNo)
+                    </td>
+                    @if (item.SentimentScore != null)
+                    {
+                        <td>
+                            @(item.SentimentScore * 10)/10
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>
+                        @item.DateTimeSubmitted
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+    <div id="neutral" class="tab-pane fade">
+        <table class="table">
+            <tr>
+                <th>
+                    Feedback
+                </th>
+                <th>
+                    Transaction Number
+                </th>
+                <th>
+                    Sentiment Score
+                </th>
+                <th>Date Submitted</th>
+            </tr>
+
+            @foreach (var item in Model.NeutralSentiments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.transactionNo)
+                    </td>
+                    @if (item.SentimentScore != null)
+                    {
+                        <td>
+                            @(item.SentimentScore * 10)/10
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>
+                        @item.DateTimeSubmitted
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+@section scripts{
+  <!--Load the AJAX API-->
+<script type="text/javascript" src="~/Scripts/loader.js"></script>
+<script type="text/javascript">
+
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Sentiment');
+        data.addColumn('number', 'value');
+        data.addRows([
+          ['Positive', @Model.PositiveSentiments.Count],
+          ['Negative', @Model.NegativeSentiments.Count],
+          ['Neutral', @Model.NeutralSentiments.Count]
+        ]);
+
+        // Set chart options
+        var options = {
+            'width': 350,
+            'height': 200,
+            'chartArea': {
+                left: "15%",
+                top: "5%",
+                backgroundColor: {
+                    'fill': '#F4F4F4',
+                    'opacity': 100
+                },
+            }
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+
+        data = google.visualization.arrayToDataTable([
+     ['Sentiment', 'value', { role: 'style' }],
+     ['Positive',  @Model.PositiveSentiments.Count, 'blue'],
+     ['Negative', @Model.NegativeSentiments.Count, 'red'],
+     ['Neutral',  @Model.NeutralSentiments.Count, 'orange']
+        ]);
+
+        options = {
+            'width': 400,
+            'height': 150,
+            'chartArea': { left: "15%", top: "0" },
+            'legend':'none'
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var bar_chart = new google.visualization.BarChart(document.getElementById('bar_div'));
+        bar_chart.draw(data, options);
+        
+    }
+</script>
 }
-
-</table>

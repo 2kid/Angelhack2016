@@ -36,7 +36,7 @@ namespace AngelHack2016.Migrations
                         referenceNo = c.String(),
                         longitude = c.Double(nullable: false),
                         latitude = c.Double(nullable: false),
-                        quicine = c.String(),
+                        cuisine = c.String(),
                     })
                 .PrimaryKey(t => t.BusinessId);
             

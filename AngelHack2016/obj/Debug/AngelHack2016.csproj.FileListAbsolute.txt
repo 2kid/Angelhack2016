@@ -63,3 +63,5 @@ C:\Users\2kid\Documents\Visual Studio 2013\Projects\AngelHack2016\AngelHack2016\
 C:\Users\2kid\Documents\Visual Studio 2013\Projects\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.csprojResolveAssemblyReference.cache
 C:\Users\2kid\Documents\Visual Studio 2013\Projects\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.Migrations.init1.resources
 C:\Users\2kid\Documents\Visual Studio 2013\Projects\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.Migrations.init2.resources
+C:\Users\2kid\documents\visual studio 2013\Projects\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.Migrations.init3.resources
+C:\Users\2kid\documents\visual studio 2013\Projects\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.Migrations.init4.resources

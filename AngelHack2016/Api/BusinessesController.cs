@@ -17,9 +17,9 @@ namespace AngelHack2016.Api
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Businesses
-        public string[] GetBusinesses(string quicine)
+        public string[] GetBusinesses(string cuisine)
         {
-            string[] primarykeys = db.Businesses.Where(r=>r.quicine.Contains(quicine)).Select(u=>u.BusinessId.ToString()).ToArray();
+            string[] primarykeys = db.Businesses.Where(r=>r.cuisine.Contains(cuisine)).Select(u=>u.BusinessId.ToString()).ToArray();
             //return primary keys of Businesses
             return primarykeys;
         }

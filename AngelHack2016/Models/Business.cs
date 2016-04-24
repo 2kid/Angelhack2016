@@ -17,7 +17,7 @@ namespace AngelHack2016.Models
 
         public double longitude { get; set; }
         public double latitude { get; set; }
-        public string quicine { get; set; }
+        public string cuisine { get; set; }
     }
 
     public class lnglat

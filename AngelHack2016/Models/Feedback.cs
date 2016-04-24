@@ -28,11 +28,9 @@ namespace AngelHack2016.Models
 
     public class FeedbackResult
     {
-        public int FeedbackResultId  { get; set; }
-        public float PositiveSentiments { get; set; }
-        public float NegativeSentiments { get; set; }
-        public float NeutralSentiments { get; set; }
-        public List<Feedback> Feedback { get; set; }
+        public List<Feedback> PositiveSentiments { get; set; }
+        public List<Feedback> NegativeSentiments { get; set; }
+        public List<Feedback> NeutralSentiments { get; set; }
 
     }
 
@@ -41,7 +39,7 @@ namespace AngelHack2016.Models
         public int FeedbackId { get; set; }
         public string Value { get; set; }
         public int transactionNo { get; set; }
-
+        public DateTime DateTimeSubmitted { get; set; }
         public decimal? SentimentScore { get; set; }
 
         public int BusinessId { get; set; }

@@ -189,6 +189,14 @@
     <Compile Include="Migrations\201604232213282_init2.Designer.cs">
       <DependentUpon>201604232213282_init2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604232250069_init3.cs" />
+    <Compile Include="Migrations\201604232250069_init3.Designer.cs">
+      <DependentUpon>201604232250069_init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604232336419_init4.cs" />
+    <Compile Include="Migrations\201604232336419_init4.Designer.cs">
+      <DependentUpon>201604232336419_init4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Business.cs" />
@@ -218,6 +226,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -280,6 +289,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604232213282_init2.resx">
       <DependentUpon>201604232213282_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604232250069_init3.resx">
+      <DependentUpon>201604232250069_init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604232336419_init4.resx">
+      <DependentUpon>201604232336419_init4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -83,6 +83,7 @@ namespace AngelHack2016.Controllers
             {
                 if (!db.FeedBacks.Any(a => a.transactionNo == feedback.transactionNo))
                 {
+                    feedback.DateTimeSubmitted = DateTime.Now;
                     db.FeedBacks.Add(feedback);
                     db.SaveChanges();
                     return RedirectToAction("Index");
