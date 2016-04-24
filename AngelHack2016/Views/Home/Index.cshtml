@@ -2,16 +2,9 @@
     ViewBag.Title = "Home Page";
 }
 
-@using(Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-<div class="form-horizontal">
-@Html.Label("referenceNo","Reference Number") 
-    @Html.TextBox("referenceNo", "", new { @class="form-control"})
-    @Html.Label("transactionNo","Transaction Number")  
-    @Html.TextBox("transactionNo", "", new { @class = "form-control" })
-    <br />
-    <button type="submit">Open</button>
-</div>
-     
+@section Styles{
+<link href="~/Content/cover.css"  rel="stylesheet"/>
 }
+<div class="container">
+    <iframe src="https://webchat.botframework.com/embed/ConSerge?s=9ei6DuLTjfI.cwA.CUo.Y3ww2W2TBupxp1ahnCzo0HewSR864UGcN5MCFMHu3pE" style="height: 502px; max-height: 502px; width: 100%; margin: 50px 0 0 0;"></iframe>
+</div>

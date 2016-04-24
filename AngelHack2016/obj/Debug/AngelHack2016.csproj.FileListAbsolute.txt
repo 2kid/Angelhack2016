@@ -125,3 +125,4 @@ C:\Users\2kid\Documents\GitHub\AngelHack2016\AngelHack2016\bin\Microsoft.Owin.Se
 C:\Users\2kid\Documents\GitHub\AngelHack2016\AngelHack2016\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\2kid\Documents\GitHub\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.dll
 C:\Users\2kid\Documents\GitHub\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.pdb
+C:\Users\2kid\Documents\GitHub\AngelHack2016\AngelHack2016\obj\Debug\AngelHack2016.csprojResolveAssemblyReference.cache

@@ -15,7 +15,10 @@ namespace AngelHack2016.Controllers
         {
             return View();
         }
-
+        public ActionResult FeedbackStart()
+        {
+            return View();
+        }
        
         public ActionResult Maps(string[] primaryKeys)
         {

@@ -23,17 +23,17 @@ namespace AngelHack2016.Controllers
         }
 
         // GET: Businesses
-        public async Task<ActionResult> FeedbackAnalysis()
+        public async Task<ActionResult> FeedbackAnalysis(int businessId)
         {
-            List<Feedback> unAnalyzedFeedback = db.FeedBacks.Include(a => a.Business).Where(r => r.Business.Username == User.Identity.Name && r.SentimentScore == null).ToList();
-            List<int> oldAnalyzedFeedbackIds = db.FeedBacks.Include(a => a.Business).Where(r => r.Business.Username == User.Identity.Name && r.SentimentScore != null).Select(u => u.FeedbackId).ToList();
+            List<Feedback> unAnalyzedFeedback = db.FeedBacks.Include(a => a.Business).Where(r => r.Business.Username == User.Identity.Name && r.SentimentScore == null && r.BusinessId == businessId).ToList();
+            List<int> oldAnalyzedFeedbackIds = db.FeedBacks.Include(a => a.Business).Where(r => r.Business.Username == User.Identity.Name && r.SentimentScore != null && r.BusinessId == businessId).Select(u => u.FeedbackId).ToList();
             unAnalyzedFeedback.RemoveAll(b => oldAnalyzedFeedbackIds.Contains(b.FeedbackId));
             if(unAnalyzedFeedback.Count > 0)
             {
                 await Helper.MakeRequest(db, unAnalyzedFeedback);
             }
-            
-            List<Feedback> analyzedFeedback = db.FeedBacks.Include(a=>a.Business).Where(r=>r.Business.Username == User.Identity.Name && r.SentimentScore != null).ToList();
+
+            List<Feedback> analyzedFeedback = db.FeedBacks.Include(a => a.Business).Where(r => r.Business.Username == User.Identity.Name && r.SentimentScore != null && r.BusinessId == businessId).ToList();
 
                 FeedbackResult result = new FeedbackResult();
                 result.PositiveSentiments = analyzedFeedback.Where(m => m.SentimentScore >= 0.6m).ToList();
@@ -103,7 +103,7 @@ namespace AngelHack2016.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BusinessId,Name,Industry,maxTransactionNumber,minTransactionNumber,referenceNo,,longitude,latitude,cuisine")] Business business)
+        public ActionResult Edit([Bind(Include = "BusinessId,Name,Industry,maxTransactionNumber,minTransactionNumber,referenceNo,longitude,latitude,cuisine")] Business business)
         {
             if (ModelState.IsValid)
             {
