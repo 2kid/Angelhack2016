@@ -23,6 +23,7 @@ namespace AngelHack2016.Migrations
                 var store = new RoleStore<IdentityRole>(context);
                 var manager = new RoleManager<IdentityRole>(store);
                 var role = new IdentityRole { Name = "Customer" };
+                //  This method will be called after migrating to the latest version.
 
                 manager.Create(role);
             }
@@ -34,7 +35,7 @@ namespace AngelHack2016.Migrations
 
                 manager.Create(role);
             }
-         
+
             // Accounts
             if (!context.Users.Any(u => u.UserName == "moses@spectres.solutions"))
             {

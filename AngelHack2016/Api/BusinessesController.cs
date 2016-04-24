@@ -17,11 +17,16 @@ namespace AngelHack2016.Api
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Businesses
-        public string[] GetBusinesses(string cuisine)
+        public string GetBusinesses(string cuisine)
         {
-            string[] primarykeys = db.Businesses.Where(r=>r.cuisine.Contains(cuisine)).Select(u=>u.BusinessId.ToString()).ToArray();
+            int[] primarykeys = db.Businesses.Where(r=>r.cuisine.Contains(cuisine)).Select(u=>u.BusinessId).ToArray();
             //return primary keys of Businesses
-            return primarykeys;
+            //return primarykeys;
+            //string s = string.Join(',',primarykeys);
+            //return string.Format("{0}://{1}{2}", Request.RequestUri.Scheme,
+            //Request.RequestUri.Host, "/Home/Maps",primarykeys);
+            return Url.Link("Default", new { controller = "Home", action = "Maps" }) + "?" + string.Join("&", primarykeys.Select(x => "primaryKeys=" + x));
+          
         }
 
         // GET: api/Businesses/5
